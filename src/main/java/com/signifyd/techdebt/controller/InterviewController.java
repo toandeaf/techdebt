@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/interview")
 public class InterviewController {
@@ -19,7 +21,7 @@ public class InterviewController {
     }
 
     @PostMapping("/persist")
-    public ResponseEntity persistInterview(@RequestBody Interview interview) {
+    public ResponseEntity persistInterview(@RequestBody Interview interview) throws IOException {
         Interview persistedInterview = interviewService.persistInterview(interview);
         return new ResponseEntity(persistedInterview, HttpStatus.ACCEPTED);
     }

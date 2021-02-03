@@ -6,6 +6,7 @@ import com.signifyd.techdebt.model.Engineer;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +21,9 @@ public class EngineerService {
 
     private final InterviewRepository interviewRepository;
     private final EngineerRepository engineerRepository;
-    private static final String ENGINEER_CSV_FILE = "/app/Engineers.csv";
+
+    @Value("${data.csv.file}")
+    private String ENGINEER_CSV_FILE;
 
     public EngineerService(EngineerRepository engineerRepository, InterviewRepository interviewRepository) {
         this.engineerRepository = engineerRepository;
@@ -39,7 +42,6 @@ public class EngineerService {
             engineers.add(mapRecordToEngineer(record));
         }
         System.out.println("Loading " + engineers.size() + " engineers into DB.");
-
         engineerRepository.saveAll(engineers);
     }
 

@@ -18,6 +18,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+    volumes:
+      - ./src/main/resources/interviews:/app/interviews
 volumes:
   mongodb_data_container:
+  interview_data_container:
 
